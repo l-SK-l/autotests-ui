@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тестовая страница для Playwright</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .section h2 {
+            color: #333;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f8f9fa;
+        }
+        .hidden {
+            display: none;
+        }
+        .visible {
+            display: block;
+        }
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+        .alert-success {
+            color: #155724;
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+        }
+        .alert-error {
+            color: #721c24;
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 id="main-title" data-testid="page-title">Тестовая страница для обучения Playwright</h1>
+        
+        <!-- Секция с формами -->
+        <div class="section" id="forms-section">
+            <h2>Формы и элементы ввода</h2>
+            
+            <form id="test-form" name="testForm" action="#" method="post">
+                <div class="form-group">
+                    <label for="username">Имя пользователя:</label>
+                    <input type="text" id="username" name="username" placeholder="Введите имя пользователя" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" placeholder="test@example.com" data-testid="email-input">
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Пароль:</label>
+                    <input type="password" id="password" name="password" placeholder="Введите пароль">
+                </div>
+                
+                <div class="form-group">
+                    <label for="age">Возраст:</label>
+                    <input type="number" id="age" name="age" min="18" max="100" value="25">
+                </div>
+                
+                <div class="form-group">
+                    <label for="birthdate">Дата рождения:</label>
+                    <input type="date" id="birthdate" name="birthdate">
+                </div>
+                
+                <div class="form-group">
+                    <label for="country">Страна:</label>
+                    <select id="country" name="country">
+                        <option value="">Выберите страну</option>
+                        <option value="ru">Россия</option>
+                        <option value="us">США</option>
+                        <option value="de">Германия</option>
+                        <option value="fr">Франция</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Пол:</label>
+                    <input type="radio" id="male" name="gender" value="male">
+                    <label for="male">Мужской</label>
+                    <input type="radio" id="female" name="gender" value="female">
+                    <label for="female">Женский</label>
+                </div>
+                
+                <div class="form-group">
+                    <label>Интересы:</label>
+                    <input type="checkbox" id="sports" name="interests" value="sports">
+                    <label for="sports">Спорт</label>
+                    <input type="checkbox" id="music" name="interests" value="music">
+                    <label for="music">Музыка</label>
+                    <input type="checkbox" id="travel" name="interests" value="travel">
+                    <label for="travel">Путешествия</label>
+                </div>
+                
+                <div class="form-group">
+                    <label for="bio">О себе:</label>
+                    <textarea id="bio" name="bio" rows="4" placeholder="Расскажите о себе..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <input type="checkbox" id="agree" name="agree" required>
+                    <label for="agree">Я согласен с условиями использования</label>
+                </div>
+                
+                <button type="submit" id="submit-btn" data-testid="submit-button">Отправить</button>
+                <button type="reset" id="reset-btn">Очистить</button>
+            </form>
+        </div>
+        
+        <!-- Секция с кнопками и действиями -->
+        <div class="section" id="buttons-section">
+            <h2>Кнопки и действия</h2>
+            
+            <button id="alert-btn" onclick="showAlert()">Показать Alert</button>
+            <button id="confirm-btn" onclick="showConfirm()">Показать Confirm</button>
+            <button id="prompt-btn" onclick="showPrompt()">Показать Prompt</button>
+            
+            <button id="toggle-btn" onclick="toggleElement()">Показать/Скрыть элемент</button>
+            <div id="toggle-element" class="hidden">
+                <p>Этот элемент можно показать или скрыть</p>
+            </div>
+            
+            <button id="disable-btn" onclick="toggleDisable()">Включить/Отключить кнопку</button>
+            <button id="target-btn" data-testid="target-button">Целевая кнопка</button>
+            
+            <button id="add-item-btn" onclick="addListItem()">Добавить элемент в список</button>
+        </div>
+        
+        <!-- Секция со списками -->
+        <div class="section" id="lists-section">
+            <h2>Списки</h2>
+            
+            <h3>Неупорядоченный список:</h3>
+            <ul id="unordered-list">
+                <li class="list-item">Элемент 1</li>
+                <li class="list-item">Элемент 2</li>
+                <li class="list-item">Элемент 3</li>
+            </ul>
+            
+            <h3>Упорядоченный список:</h3>
+            <ol id="ordered-list">
+                <li>Первый пункт</li>
+                <li>Второй пункт</li>
+                <li>Третий пункт</li>
+            </ol>
+        </div>
+        
+        <!-- Секция с таблицей -->
+        <div class="section" id="table-section">
+            <h2>Таблица</h2>
+            
+            <table id="data-table" data-testid="user-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Имя</th>
+                        <th>Email</th>
+                        <th>Возраст</th>
+                        <th>Действия</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-user-id="1">
+                        <td>1</td>
+                        <td>Иван Иванов</td>
+                        <td>ivan@example.com</td>
+                        <td>30</td>
+                        <td>
+                            <button class="edit-btn" onclick="editUser(1)">Редактировать</button>
+                            <button class="delete-btn" onclick="deleteUser(1)">Удалить</button>
+                        </td>
+                    </tr>
+                    <tr data-user-id="2">
+                        <td>2</td>
+                        <td>Мария Петрова</td>
+                        <td>maria@example.com</td>
+                        <td>25</td>
+                        <td>
+                            <button class="edit-btn" onclick="editUser(2)">Редактировать</button>
+                            <button class="delete-btn" onclick="deleteUser(2)">Удалить</button>
+                        </td>
+                    </tr>
+                    <tr data-user-id="3">
+                        <td>3</td>
+                        <td>Петр Сидоров</td>
+                        <td>petr@example.com</td>
+                        <td>35</td>
+                        <td>
+                            <button class="edit-btn" onclick="editUser(3)">Редактировать</button>
+                            <button class="delete-btn" onclick="deleteUser(3)">Удалить</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Секция с ссылками -->
+        <div class="section" id="links-section">
+            <h2>Ссылки</h2>
+            
+            <p>
+                <a href="https://playwright.dev/" target="_blank" id="playwright-link">Официальный сайт Playwright</a>
+            </p>
+            <p>
+                <a href="#forms-section" id="internal-link">Перейти к формам</a>
+            </p>
+            <p>
+                <a href="mailto:test@example.com" id="email-link">Отправить email</a>
+            </p>
+            <p>
+                <a href="tel:+1234567890" id="phone-link">Позвонить</a>
+            </p>
+        </div>
+        
+        <!-- Секция с медиа -->
+        <div class="section" id="media-section">
+            <h2>Медиа элементы</h2>
+            
+            <h3>Изображение:</h3>
+            <img src="https://via.placeholder.com/300x200" alt="Тестовое изображение" id="test-image">
+            
+            <h3>Видео:</h3>
+            <video controls width="300" id="test-video">
+                <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                Ваш браузер не поддерживает видео.
+            </video>
+        </div>
+        
+        <!-- Секция с iframe -->
+        <div class="section" id="iframe-section">
+            <h2>Iframe</h2>
+            <iframe src="https://www.example.com" width="100%" height="200" id="test-iframe" title="Тестовый iframe"></iframe>
+        </div>
+        
+        <!-- Секция с сообщениями -->
+        <div class="section" id="messages-section">
+            <h2>Сообщения</h2>
+            
+            <div id="success-message" class="alert alert-success hidden">
+                Операция выполнена успешно!
+            </div>
+            
+            <div id="error-message" class="alert alert-error hidden">
+                Произошла ошибка при выполнении операции!
+            </div>
+            
+            <button onclick="showSuccessMessage()">Показать успешное сообщение</button>
+            <button onclick="showErrorMessage()">Показать сообщение об ошибке</button>
+        </div>
+    </div>
+    
+    <script>
+        // JavaScript функции для интерактивности
+        function showAlert() {
+            alert('Это Alert сообщение!');
+        }
+        
+        function showConfirm() {
+            if (confirm('Вы уверены?')) {
+                alert('Вы подтвердили действие');
+            } else {
+                alert('Вы отменили действие');
+            }
+        }
+        
+        function showPrompt() {
+            const result = prompt('Введите ваше имя:');
+            if (result) {
+                alert('Привет, ' + result + '!');
+            }
+        }
+        
+        function toggleElement() {
+            const element = document.getElementById('toggle-element');
+            if (element.classList.contains('hidden')) {
+                element.classList.remove('hidden');
+                element.classList.add('visible');
+            } else {
+                element.classList.remove('visible');
+                element.classList.add('hidden');
+            }
+        }
+        
+        function toggleDisable() {
+            const button = document.getElementById('target-btn');
+            button.disabled = !button.disabled;
+        }
+        
+        function addListItem() {
+            const list = document.getElementById('unordered-list');
+            const newItem = document.createElement('li');
+            newItem.className = 'list-item';
+            newItem.textContent = 'Новый элемент ' + (list.children.length + 1);
+            list.appendChild(newItem);
+        }
+        
+        function editUser(userId) {
+            alert('Редактирование пользователя с ID: ' + userId);
+        }
+        
+        function deleteUser(userId) {
+            if (confirm('Удалить пользователя с ID: ' + userId + '?')) {
+                const row = document.querySelector(`tr[data-user-id="${userId}"]`);
+                if (row) {
+                    row.remove();
+                    alert('Пользователь удален');
+                }
+            }
+        }
+        
+        function showSuccessMessage() {
+            document.getElementById('success-message').classList.remove('hidden');
+            setTimeout(() => {
+                document.getElementById('success-message').classList.add('hidden');
+            }, 3000);
+        }
+        
+        function showErrorMessage() {
+            document.getElementById('error-message').classList.remove('hidden');
+            setTimeout(() => {
+                document.getElementById('error-message').classList.add('hidden');
+            }, 3000);
+        }
+        
+        // Обработчик отправки формы
+        document.getElementById('test-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Форма отправлена! (это демо, данные не сохраняются)');
+        });
+    </script>
+</body>
+</html>

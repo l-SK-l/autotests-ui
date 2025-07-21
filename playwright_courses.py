@@ -1,4 +1,4 @@
-from playwright.sync_api import sync_playwright
+from playwright.sync_api import sync_playwright, expect
 
 
 with sync_playwright() as playwright:
@@ -28,6 +28,11 @@ with sync_playwright() as playwright:
     context = browser.new_context(storage_state="browser-state.json")
     page = context.new_page()
 
-    page.goto("https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/dashboard")
+    page.goto('https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/courses')
 
-    page.wait_for_timeout(5000)
+    courses_title = page.get_by_test_id('courses-list-toolbar-title-text')
+    expect(courses_title).to_be_visible()
+
+    empty_view_title = page.get_by_test_id('courses-list-empty-view-title-text')
+    expect(empty_view_title).to_be_visible()
+    expect(empty_view_title).to_have_text('There is no results')

@@ -7,4 +7,5 @@ node_modules/
 /playwright/.cache/
 
 .venv
-.vscode
+.pytest_cache
+__pycache__

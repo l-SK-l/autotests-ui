@@ -8,5 +8,8 @@ node_modules/
 
 .venv
 .pytest_cache
-__pycache__
+__pycache__/
+*/__pycache__/
+*.pyc
+*.pyo
 browser-state.json

@@ -19,7 +19,6 @@ class CoursesListPage(BasePage):
         self.sidebar = SidebarComponent(page)
         self.empty_view = EmptyViewComponent(page, 'courses-list')
 
-    @allure.step('Check visible empty view "{title}"')
     def check_visible_empty_view(self):
         self.empty_view.check_visible(
             title='There is no results',

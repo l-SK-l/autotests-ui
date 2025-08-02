@@ -28,13 +28,9 @@ def initialize_playwright_page(
     video_path = page.video.path()
     if video_path and os.path.exists(video_path):
         new_video_path = f'./videos/{test_name}.webm'
-        try:
-            shutil.copy2(video_path, new_video_path)
-            os.remove(video_path)
-            video_path = new_video_path
-        except Exception:
-            # If it was not possible to rename, use the original path.
-            pass
+        shutil.copy2(video_path, new_video_path)
+        os.remove(video_path)
+        video_path = new_video_path
 
     allure.attach.file(f'./tracing/{test_name}.zip', name='trace', extension='zip')
     if video_path and os.path.exists(video_path):

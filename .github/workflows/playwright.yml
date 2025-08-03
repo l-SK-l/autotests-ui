@@ -25,6 +25,7 @@ jobs:
       env:
         CI: true
         APP_URL: 'https://nikita-filonov.github.io/qa-automation-engineer-ui-course'
+        HEADLESS: true
         BROWSERS: '["chromium"]'
         TEST_USER__EMAIL: 'user.name@gmail.com'
         TEST_USER__USERNAME: 'username'

@@ -24,6 +24,12 @@ jobs:
       run: pytest tests/ -v --tb=short
       env:
         CI: true
+        APP_URL: 'https://nikita-filonov.github.io/qa-automation-engineer-ui-course'
+        BROWSERS: '["chromium"]'
+        TEST_USER__EMAIL: 'user.name@gmail.com'
+        TEST_USER__USERNAME: 'username'
+        TEST_USER__PASSWORD: 'password'
+        TEST_DATA__IMAGE_PNG_FILE: './testdata/files/image.png'
     - name: Upload test results
       uses: actions/upload-artifact@v4
       if: always()

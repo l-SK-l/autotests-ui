@@ -1,18 +1,20 @@
 import os
 import shutil
-import allure
 from typing import Generator
+import allure
+
+from config import Browser, settings
 from playwright.sync_api import Playwright, Page
-from config import settings
 
 
 def initialize_playwright_page(
         playwright: Playwright,
         test_name: str,
+        browser_type: Browser,
         storage_state: str | None = None
 ) -> Generator[Page, None, None]:
     headless = os.getenv('CI', 'false').lower() == 'true'
-    browser = playwright.chromium.launch(headless=headless)
+    browser = playwright[browser_type].launch(headless=headless)
     context = browser.new_context(
         base_url=settings.get_base_url(),
         storage_state=storage_state, 

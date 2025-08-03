@@ -6,7 +6,7 @@ from elements.base_element import BaseElement
 class FileInput(BaseElement):
     @property
     def type_of(self) -> str:
-        return "file input"
+        return 'file input'
 
     def set_input_files(self, file: str, nth: int = 0, **kwargs):
         with allure.step(f'Set file "{file}" to the {self.type_of} "{self.name}"'):

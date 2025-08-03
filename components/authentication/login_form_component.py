@@ -11,7 +11,7 @@ class LoginFormComponent(BaseComponent):
         self.email_input = Input(page, 'login-form-email-input', 'Email')
         self.password_input = Input(page, 'login-form-password-input', 'Password')
 
-    @allure.step("Fill login form")
+    @allure.step('Fill login form')
     def fill(self, email: str, password: str):
         self.email_input.fill(email)
         self.email_input.check_have_value(email)
@@ -19,7 +19,7 @@ class LoginFormComponent(BaseComponent):
         self.password_input.fill(password)
         self.password_input.check_have_value(password)
 
-    @allure.step("Check visible login form")
+    @allure.step('Check visible login form')
     def check_visible(self, email: str, password: str):
         self.email_input.check_visible()
         self.email_input.check_have_value(email)

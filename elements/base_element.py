@@ -10,7 +10,7 @@ class BaseElement:
 
     @property
     def type_of(self) -> str:
-        return "base element"
+        return 'base element'
 
     def get_locator(self, nth: int = 0, **kwargs) -> Locator:
         locator = self.locator.format(**kwargs)

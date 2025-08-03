@@ -7,7 +7,7 @@ from elements.base_element import BaseElement
 class Button(BaseElement):
     @property
     def type_of(self) -> str:
-        return "button"
+        return 'button'
 
     def check_enabled(self, nth: int = 0, **kwargs):
         with allure.step(f'Checking that {self.type_of} "{self.name}" is enabled'):

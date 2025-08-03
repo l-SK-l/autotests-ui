@@ -27,10 +27,10 @@ class CourseViewComponent(BaseComponent):
         self.title.check_have_text(title, nth=index)
 
         self.max_score_text.check_visible(nth=index)
-        self.max_score_text.check_have_text(f"Max score: {max_score}", nth=index)
+        self.max_score_text.check_have_text(f'Max score: {max_score}', nth=index)
 
         self.min_score_text.check_visible(nth=index)
-        self.min_score_text.check_have_text(f"Min score: {min_score}", nth=index)
+        self.min_score_text.check_have_text(f'Min score: {min_score}', nth=index)
 
         self.estimated_time_text.check_visible(nth=index)
-        self.estimated_time_text.check_have_text(f"Estimated time: {estimated_time}", nth=index)
+        self.estimated_time_text.check_have_text(f'Estimated time: {estimated_time}', nth=index)

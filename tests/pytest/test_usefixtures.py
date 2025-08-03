@@ -3,12 +3,12 @@ import pytest
 
 @pytest.fixture
 def clear_books_database():
-    print("[FIXTURE] Delete all data into DB")
+    print('[FIXTURE] Delete all data into DB')
 
 
 @pytest.fixture
 def fill_books_database():
-    print("[FIXTURE] Create new data into DB")
+    print('[FIXTURE] Create new data into DB')
 
 
 @pytest.mark.usefixtures('fill_books_database')

@@ -24,7 +24,7 @@ class CreateCourseExerciseFormComponent(BaseComponent):
     @allure.step('Check visible create course exercise form at index "{index}"')
     def check_visible(self, index: int, title: str, description: str):
         self.subtitle.check_visible(index=index)
-        self.subtitle.check_have_text(f"#{index + 1} Exercise", index=index)
+        self.subtitle.check_have_text(f'#{index + 1} Exercise', index=index)
 
         self.title_input.check_visible(index=index)
         self.title_input.check_have_value(title, index=index)

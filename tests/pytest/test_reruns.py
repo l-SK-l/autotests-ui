@@ -3,7 +3,7 @@ import random
 
 import pytest
 
-PLATFORM = "Linux"
+PLATFORM = 'Linux'
 
 
 @pytest.mark.flaky(reruns=3, reruns_delay=2)
@@ -22,7 +22,7 @@ class TestReruns:
         # assert random.choice([True, False])
         pass
 
-@pytest.mark.flaky(reruns=3, reruns_delay=2, condition=PLATFORM == "Windows")
+@pytest.mark.flaky(reruns=3, reruns_delay=2, condition=PLATFORM == 'Windows')
 def test_rerun_with_condition():
     # assert random.choice([True, False])
     pass

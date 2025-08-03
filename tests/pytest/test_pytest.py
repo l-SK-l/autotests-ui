@@ -1,5 +1,5 @@
 def test_first_try():
-    print("Hello World!")
+    print('Hello World!')
 
 
 def test_assert_positive_case():

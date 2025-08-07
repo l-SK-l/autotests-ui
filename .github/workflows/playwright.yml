@@ -47,16 +47,35 @@ jobs:
         run: |
           pytest -m regression --alluredir=allure-results --numprocesses 2  # Run tests marked as "regression" and generate results for Allure
 
-      # 5. Step to get Allure report history if it exists
-      - name: Get Allure history
-        uses: actions/checkout@v4  # Clone the repository again to get report history
-        if: always()  # Always run, regardless of previous step success or failure
-        continue-on-error: true  # If an error occurs here, workflow will still continue
+      # 5. Step to upload Allure results as artifacts for the next job
+      - name: Upload Allure results
+        if: always()  # Always upload results, even if tests failed
+        uses: actions/upload-artifact@v4  # Upload artifacts to be used in the next job
+        with:
+          name: allure-results  # Name of the artifact
+          path: allure-results  # Path to the results directory
+
+  publish-report:
+    if: always()  # Always run this job, even if the previous job failed
+    needs: [ run-tests ]  # This job depends on the run-tests job
+    runs-on: ubuntu-latest  # Specify that this job will run on the latest version of Ubuntu
+
+    steps:
+      # 1. Step to clone the repository to get report history from gh-pages branch
+      - name: Check out repository
+        uses: actions/checkout@v4  # Clone the repository to get report history
         with:
           ref: gh-pages  # Specify gh-pages branch to get reports
           path: gh-pages  # Specify path to save reports
 
-      # 6. Step to generate and display the Allure report
+      # 2. Step to download Allure results from the previous job
+      - name: Download Allure results
+        uses: actions/download-artifact@v4  # Download artifacts from the previous job
+        with:
+          name: allure-results  # Name of the artifact to download
+          path: allure-results  # Path where to save the downloaded results
+
+      # 3. Step to generate and display the Allure report
       - name: Generates Allure Report with history
         uses: simple-elf/allure-report-action@v1.7  # Use a ready-made solution from GitHub Marketplace to generate the Allure report
         if: always()  # This step also always runs
@@ -64,7 +83,7 @@ jobs:
           allure_results: allure-results  # Specify directory with test results
           allure_history: allure-history  # Specify directory for Allure report history
 
-      # 7. Step to deploy the Allure report to GitHub Pages so it can be viewed in the browser
+      # 4. Step to deploy the Allure report to GitHub Pages so it can be viewed in the browser
       - name: Deploy report to Github Pages
         if: always()  # Always runs, regardless of other steps' success
         uses: peaceiris/actions-gh-pages@v4  # Use GitHub Action to publish the report to GitHub Pages

@@ -13,6 +13,9 @@ __pycache__/
 */__pycache__/
 *.pyc
 *.pyo
-browser-state.json
+*.html
+*.json
+videos
+tracing
 allure-results/
 allure-report/

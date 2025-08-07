@@ -35,6 +35,15 @@ jobs:
 
       # 4. Step to run tests using pytest and generate Allure reports
       - name: Run Playwright tests with pytest and generate Allure results
+        env:
+          CI: true
+          APP_URL: 'https://nikita-filonov.github.io/qa-automation-engineer-ui-course'
+          HEADLESS: false
+          BROWSERS: '["chromium"]'
+          TEST_USER.EMAIL: 'user.name@gmail.com'
+          TEST_USER.USERNAME: 'username'
+          TEST_USER.PASSWORD: 'password'
+          TEST_DATA.IMAGE_PNG_FILE: './testdata/files/image.png'
         run: |
           pytest -m regression --alluredir=allure-results --numprocesses 2  # Run tests marked as "regression" and generate results for Allure
 

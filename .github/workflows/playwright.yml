@@ -44,6 +44,8 @@ jobs:
           TEST_USER.USERNAME: 'username'
           TEST_USER.PASSWORD: 'password'
           TEST_DATA.IMAGE_PNG_FILE: './testdata/files/image.png'
+          UI_COVERAGE_APPS: '[{"key": "ui-course", "url": "https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/auth/login", "name": "UI Course", "tags": ["UI", "COURSES"], "repository": "https://github.com/Nikita-Filonov/qa-automation-engineer-ui-course"}]'
+          UI_COVERAGE_HTML_REPORT_FILE: "./coverage.html"
         run: |
           pytest -m regression --alluredir=allure-results --numprocesses 2  # Run tests marked as "regression" and generate results for Allure
 
@@ -58,6 +60,9 @@ jobs:
 
       # 6. Step to generate HTML coverage report and update history
       - name: Generate Coverage report
+        env:
+          UI_COVERAGE_APPS: '[{"key": "ui-course", "url": "https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/auth/login", "name": "UI Course", "tags": ["UI", "COURSES"], "repository": "https://github.com/Nikita-Filonov/qa-automation-engineer-ui-course"}]'
+          UI_COVERAGE_HTML_REPORT_FILE: "./coverage.html"
         run: |
           ui-coverage-tool save-report
 

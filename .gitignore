@@ -19,3 +19,7 @@ videos
 tracing
 allure-results/
 allure-report/
+coverage.html
+coverage-results
+coverage-report.json
+coverage-history.json

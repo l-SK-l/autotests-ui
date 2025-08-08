@@ -1,5 +1,6 @@
 import allure
 from playwright.sync_api import Locator, expect
+from ui_coverage_tool import ActionType
 
 from elements.base_element import BaseElement
 
@@ -17,7 +18,11 @@ class Textarea(BaseElement):
             locator = self.get_locator(nth, **kwargs)
             locator.fill(value)
 
+        self.track_coverage(ActionType.FILL, nth, **kwargs)
+
     def check_have_value(self, value: str, nth: int = 0, **kwargs):
         with allure.step(f'Checking that {self.type_of} "{self.name}" has a value "{value}"'):
             locator = self.get_locator(nth, **kwargs)
             expect(locator).to_have_value(value)
+
+        self.track_coverage(ActionType.VALUE, nth, **kwargs)
